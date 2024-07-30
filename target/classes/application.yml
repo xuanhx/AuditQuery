@@ -1,0 +1,37 @@
+#8.130.104.152
+server:
+  port: 8080
+  servlet:
+    encoding:
+      force: true
+      enabled: true
+      charset: utf-8
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/search?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#  redis:
+#    port: 6379
+#    host: 127.0.0.1
+
+#  servlet:
+#    multipart:
+#      max-file-size: 100MB
+#      max-request-size: 1000MB
+#
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.auditquery
+

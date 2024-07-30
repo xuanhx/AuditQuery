@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.auditquery.dao.FindbugsMapper">
+
+    <resultMap type="com.auditquery.entity.Findbugs" id="FindbugsMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="problemtype" column="problemtype" jdbcType="VARCHAR"/>
+        <result property="nums" column="nums" jdbcType="VARCHAR"/>
+        <result property="classification" column="classification" jdbcType="VARCHAR"/>
+        <result property="subcategory" column="Subcategory" jdbcType="VARCHAR"/>
+        <result property="describes" column="describes" jdbcType="VARCHAR"/>
+        <result property="propose" column="propose" jdbcType="VARCHAR"/>
+        <result property="grade" column="grade" jdbcType="VARCHAR"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FindbugsMap">
+        select
+          id, problemtype, nums, classification, Subcategory, describes, propose, grade, remarks
+        from findbugs
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FindbugsMap">
+        select
+          id, problemtype, nums, classification, Subcategory, describes, propose, grade, remarks
+        from findbugs
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="problemtype != null and problemtype != ''">
+                and problemtype = #{problemtype}
+            </if>
+            <if test="nums != null and nums != ''">
+                and nums = #{nums}
+            </if>
+            <if test="classification != null and classification != ''">
+                and classification = #{classification}
+            </if>
+            <if test="subcategory != null and subcategory != ''">
+                and Subcategory = #{subcategory}
+            </if>
+            <if test="describes != null and describes != ''">
+                and describes = #{describes}
+            </if>
+            <if test="propose != null and propose != ''">
+                and propose = #{propose}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from findbugs
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="problemtype != null and problemtype != ''">
+                and problemtype = #{problemtype}
+            </if>
+            <if test="nums != null and nums != ''">
+                and nums = #{nums}
+            </if>
+            <if test="classification != null and classification != ''">
+                and classification = #{classification}
+            </if>
+            <if test="subcategory != null and subcategory != ''">
+                and Subcategory = #{subcategory}
+            </if>
+            <if test="describes != null and describes != ''">
+                and describes = #{describes}
+            </if>
+            <if test="propose != null and propose != ''">
+                and propose = #{propose}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insertFindbugs" keyProperty="id" useGeneratedKeys="true">
+        insert into findbugs(problemtype, nums, classification, Subcategory, describes, propose, grade, remarks)
+        values (#{problemtype}, #{nums}, #{classification}, #{subcategory}, #{describes}, #{propose}, #{grade}, #{remarks})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into findbugs(problemtype, nums, classification, Subcategory, describes, propose, grade, remarks)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.problemtype}, #{entity.nums}, #{entity.classification}, #{entity.subcategory}, #{entity.describes}, #{entity.propose}, #{entity.grade}, #{entity.remarks})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into findbugs(problemtype, nums, classification, Subcategory, describes, propose, grade, remarks)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.problemtype}, #{entity.nums}, #{entity.classification}, #{entity.subcategory}, #{entity.describes}, #{entity.propose}, #{entity.grade}, #{entity.remarks})
+        </foreach>
+        on duplicate key update
+        problemtype = values(problemtype),
+        nums = values(nums),
+        classification = values(classification),
+        Subcategory = values(Subcategory),
+        describes = values(describes),
+        propose = values(propose),
+        grade = values(grade),
+        remarks = values(remarks)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateFindbugs">
+        update findbugs
+        <set>
+            <if test="problemtype != null and problemtype != ''">
+                problemtype = #{problemtype},
+            </if>
+            <if test="nums != null and nums != ''">
+                nums = #{nums},
+            </if>
+            <if test="classification != null and classification != ''">
+                classification = #{classification},
+            </if>
+            <if test="subcategory != null and subcategory != ''">
+                Subcategory = #{subcategory},
+            </if>
+            <if test="describes != null and describes != ''">
+                describes = #{describes},
+            </if>
+            <if test="propose != null and propose != ''">
+                propose = #{propose},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteByIdFindbugs">
+        delete from findbugs where id = #{id}
+    </delete>
+
+</mapper>
+

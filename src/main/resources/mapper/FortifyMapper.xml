@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.auditquery.dao.FortifyMapper">
+
+    <resultMap type="com.auditquery.entity.Fortify" id="FortifyMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="problemtype" column="problemtype" jdbcType="VARCHAR"/>
+        <result property="nums" column="nums" jdbcType="VARCHAR"/>
+        <result property="classification" column="classification" jdbcType="VARCHAR"/>
+        <result property="subcategory" column="Subcategory" jdbcType="VARCHAR"/>
+        <result property="outline" column="outline" jdbcType="VARCHAR"/>
+        <result property="describes" column="describes" jdbcType="VARCHAR"/>
+        <result property="propose" column="propose" jdbcType="VARCHAR"/>
+        <result property="grade" column="grade" jdbcType="VARCHAR"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+        <result property="tbname" column="tbname" jdbcType="VARCHAR"/>
+
+
+        <collection property="tFortifyAnswer" javaType="List" ofType="com.auditquery.entity.Answer">
+            <result property="id" column="id"/>
+            <result property="problemtype" column="problemtype"/>
+            <result property="wordanswer" column="wordanswer"/>
+            <result property="pictureanswer" column="pictureanswer"/>
+            <result property="remarks" column="remarks"/>
+            <result property="tbname" column="tbname"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="searchFortify"  parameterType="string" resultMap="FortifyMap">
+        select f.problemtype,f.propose,a.wordanswer,a.pictureanswer from answer a,fortify f where a.problemtype = #{problemtype} and f.problemtype = #{problemtype}
+    </select>
+
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FortifyMap">
+        select
+          id, problemtype, nums, classification, Subcategory, outline, describes, propose, grade, remarks, tbname
+        from fortify
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FortifyMap">
+        select
+          id, problemtype, nums, classification, Subcategory, outline, describes, propose, grade, remarks, tbname
+        from fortify
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="problemtype != null and problemtype != ''">
+                and problemtype = #{problemtype}
+            </if>
+            <if test="nums != null and nums != ''">
+                and nums = #{nums}
+            </if>
+            <if test="classification != null and classification != ''">
+                and classification = #{classification}
+            </if>
+            <if test="subcategory != null and subcategory != ''">
+                and Subcategory = #{subcategory}
+            </if>
+            <if test="outline != null and outline != ''">
+                and outline = #{outline}
+            </if>
+            <if test="describes != null and describes != ''">
+                and describes = #{describes}
+            </if>
+            <if test="propose != null and propose != ''">
+                and propose = #{propose}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+            <if test="tbname != null and tbname != ''">
+                and tbname = #{tbname}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from fortify
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="problemtype != null and problemtype != ''">
+                and problemtype = #{problemtype}
+            </if>
+            <if test="nums != null and nums != ''">
+                and nums = #{nums}
+            </if>
+            <if test="classification != null and classification != ''">
+                and classification = #{classification}
+            </if>
+            <if test="subcategory != null and subcategory != ''">
+                and Subcategory = #{subcategory}
+            </if>
+            <if test="outline != null and outline != ''">
+                and outline = #{outline}
+            </if>
+            <if test="describes != null and describes != ''">
+                and describes = #{describes}
+            </if>
+            <if test="propose != null and propose != ''">
+                and propose = #{propose}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+            <if test="tbname != null and tbname != ''">
+                and tbname = #{tbname}
+            </if>
+        </where>
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="insertFortify" keyProperty="id" useGeneratedKeys="true">
+        insert into fortify(problemtype, nums, classification, Subcategory, outline, describes, propose, grade, remarks, tbname)
+        values (#{problemtype}, #{nums}, #{classification}, #{subcategory}, #{outline}, #{describes}, #{propose}, #{grade}, #{remarks}, #{tbname})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into fortify(problemtype, nums, classification, Subcategory, outline, describes, propose, grade, remarks, tbname)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.problemtype}, #{entity.nums}, #{entity.classification}, #{entity.subcategory}, #{entity.outline}, #{entity.describes}, #{entity.propose}, #{entity.grade}, #{entity.remarks}, #{entity.tbname})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into fortify(problemtype, nums, classification, Subcategory, outline, describes, propose, grade, remarks, tbname)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.problemtype}, #{entity.nums}, #{entity.classification}, #{entity.subcategory}, #{entity.outline}, #{entity.describes}, #{entity.propose}, #{entity.grade}, #{entity.remarks}, #{entity.tbname})
+        </foreach>
+        on duplicate key update
+        problemtype = values(problemtype),
+        nums = values(nums),
+        classification = values(classification),
+        Subcategory = values(Subcategory),
+        outline = values(outline),
+        describes = values(describes),
+        propose = values(propose),
+        grade = values(grade),
+        remarks = values(remarks),
+        tbname = values(tbname)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateFortify">
+        update fortify
+        <set>
+            <if test="problemtype != null and problemtype != ''">
+                problemtype = #{problemtype},
+            </if>
+            <if test="nums != null and nums != ''">
+                nums = #{nums},
+            </if>
+            <if test="classification != null and classification != ''">
+                classification = #{classification},
+            </if>
+            <if test="subcategory != null and subcategory != ''">
+                Subcategory = #{subcategory},
+            </if>
+            <if test="outline != null and outline != ''">
+                outline = #{outline},
+            </if>
+            <if test="describes != null and describes != ''">
+                describes = #{describes},
+            </if>
+            <if test="propose != null and propose != ''">
+                propose = #{propose},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks},
+            </if>
+            <if test="tbname != null and tbname != ''">
+                tbname = #{tbname},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteByIdFortify">
+        delete from fortify where id = #{id}
+    </delete>
+
+</mapper>
+

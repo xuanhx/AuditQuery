@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymealf.org">
+<head>
+	<title>添加answer信息</title>
+<!--	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+	<link rel="stylesheet" type="text/css"
+		  href="/static/css/style.css" />
+</head>
+
+<body>
+<div id="wrap">
+	<div id="top_content">
+
+		<div id="content">
+			<p id="whereami">
+			</p>
+			<h1>
+				添加answer信息:
+			</h1>
+			<form id="add" th:action="@{'/detailstable/updatedetailstable'}" method="post">
+				<table cellpadding="0" cellspacing="0" border="0"
+					   class="form_table">
+					<tr>
+						<td valign="middle" align="right">
+							序号:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="id" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							问题编号:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" width="" name="questionnumber" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							测试年份:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="testyear" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							测试单位:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="testunit" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							测试人员:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="testpeople" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							测试人员联系方式:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="testpeoplelink" />
+						</td>
+					</tr>
+<!--					<tr>-->
+<!--						<td valign="middle" align="right">-->
+<!--							缺陷/风险层面:-->
+<!--						</td>-->
+<!--						<td valign="middle" align="left">-->
+<!--							<input type="text" class="inputgri" name="risklevel" />-->
+<!--						</td>-->
+<!--					</tr>-->
+					<tr>
+						<td valign="middle" align="right">
+							资产/系统名称:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="systemname" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							系统版本:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="systemversion" />
+						</td>
+					</tr>
+<!--					<tr>-->
+<!--						<td valign="middle" align="right">-->
+<!--							组件名称:-->
+<!--						</td>-->
+<!--						<td valign="middle" align="left">-->
+<!--							<input type="text" class="inputgri" name="componentname" />-->
+<!--						</td>-->
+<!--					</tr>-->
+<!--					<tr>-->
+<!--						<td valign="middle" align="right">-->
+<!--							问题描述:-->
+<!--						</td>-->
+<!--						<td valign="middle" align="left">-->
+<!--							<input type="text" class="inputgri" name="problemdescription" />-->
+<!--						</td>-->
+<!--					</tr>-->
+<!--					<tr>-->
+<!--						<td valign="middle" align="right">-->
+<!--							风险位置:-->
+<!--						</td>-->
+<!--						<td valign="middle" align="left">-->
+<!--							<input type="text" class="inputgri" name="risklocation" />-->
+<!--						</td>-->
+<!--					</tr>-->
+<!--					<tr>-->
+<!--					<td valign="middle" align="right">-->
+<!--						问题等级:-->
+<!--					</td>-->
+<!--					<td valign="middle" align="left">-->
+<!--						<input type="text" class="inputgri" name="problemlevel" />-->
+<!--					</td>-->
+<!--				</tr>-->
+					<tr>
+						<td valign="middle" align="right">
+							问题发现时间:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="problemtime" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							要求整改时间:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="requesttime" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							整改完成时间:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="completiontime" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							是否已整改:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="yesorno" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							责任单位:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="responsibleunit" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							责任人:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="responsibleperson" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							责任人联系方式:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="responsiblepersonlink" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							测试申请单号:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="applicationnumber" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right">
+							备注:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="remarks" />
+						</td>
+					</tr>
+
+				</table>
+				<p>
+					<input type="submit" class="button" value="确认修改" />
+					<input type="button" class="button" onclick="addEmp()"value="返回列表" />
+					<script>
+						function addEmp(){
+							location.href = '[[@{/detailstable/lists}]]';
+						}
+					</script>
+				</p>
+			</form>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+			//获取表单对象，并添加提交实践监听器,监听函数中第二个参数是一个函数，中间会自动传入实践对象
+			document.getElementById("add").addEventListener("submit",function (event){
+				//组织默认提交事件的发生
+				event.preventDefault();
+				//获取表单中所有元素
+				let elements = this.elements;
+				//遍历元素的值加入对象结构
+				let objectUtil = {};
+				for(let i =0; i < elements.length;i++){
+					objectUtil[elements[i].name] = elements[i].value;
+				}
+				//至此表单中所有数据都被装入js对象，我们将对象转为json对象，备传。
+				let jsonRel=JSON.stringify(objectUtil);
+				//创建XmlHttpRequest对象
+				var toFile = new XMLHttpRequest();
+				//指定请求类型，路径及是否异步
+				toFile.open("post","http://localhost:8080//detailstable/updatedetailstable",true);
+				//设置请求头，变为application/json类型
+				toFile.setRequestHeader("Content-Type","application/json");
+				//发送数据
+				toFile.send(jsonRel);
+				//最后监听返回状态，一旦发生改变，就跳转页面
+				toFile.onreadystatechange = function (){
+					if(toFile.readyState == 4 && toFile.status == 200){
+						alert("数据添加成功");
+						//接收返回页面，并打开新窗口显示
+						let responesRel=toFile.responseText;
+						document.write(responesRel);
+
+					}
+
+				}
+			})
+		</script>
+		</div>
+	</div>
+
+</div>
+</body>
+
+</html>
+

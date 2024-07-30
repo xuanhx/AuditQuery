@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.auditquery.dao.DetailstableMapper">
+
+    <resultMap type="com.auditquery.entity.Detailstable" id="DetailstableMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="questionnumber" column="questionnumber" jdbcType="VARCHAR"/>
+        <result property="testyear" column="testyear" jdbcType="VARCHAR"/>
+        <result property="testunit" column="testunit" jdbcType="VARCHAR"/>
+        <result property="testpeople" column="testpeople" jdbcType="VARCHAR"/>
+        <result property="testpeoplelink" column="testpeoplelink" jdbcType="VARCHAR"/>
+        <result property="risklevel" column="risklevel" jdbcType="VARCHAR"/>
+        <result property="systemname" column="systemname" jdbcType="VARCHAR"/>
+        <result property="systemversion" column="systemversion" jdbcType="VARCHAR"/>
+        <result property="componentname" column="componentname" jdbcType="VARCHAR"/>
+        <result property="problemdescription" column="problemdescription" jdbcType="VARCHAR"/>
+        <result property="risklocation" column="risklocation" jdbcType="VARCHAR"/>
+        <result property="problemlevel" column="problemlevel" jdbcType="VARCHAR"/>
+        <result property="problemtime" column="problemtime" jdbcType="VARCHAR"/>
+        <result property="requesttime" column="requesttime" jdbcType="VARCHAR"/>
+        <result property="completiontime" column="completiontime" jdbcType="VARCHAR"/>
+        <result property="yesorno" column="yesorno" jdbcType="VARCHAR"/>
+        <result property="responsibleunit" column="responsibleunit" jdbcType="VARCHAR"/>
+        <result property="responsibleperson" column="responsibleperson" jdbcType="VARCHAR"/>
+        <result property="responsiblepersonlink" column="responsiblepersonlink" jdbcType="VARCHAR"/>
+        <result property="applicationnumber" column="applicationnumber" jdbcType="VARCHAR"/>
+        <result property="remarks" column="remarks" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DetailstableMap">
+        select
+          id, questionnumber, testyear, testunit, testpeople, testpeoplelink, risklevel, systemname, systemversion, componentname, problemdescription, risklocation, problemlevel, problemtime, requesttime, completiontime, yesorno, responsibleunit, responsibleperson, responsiblepersonlink, applicationnumber, remarks
+        from detailstable
+        where  id= #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DetailstableMap">
+        select
+          id, questionnumber, testyear, testunit, testpeople, testpeoplelink, risklevel, systemname, systemversion, componentname, problemdescription, risklocation, problemlevel, problemtime, requesttime, completiontime, yesorno, responsibleunit, responsibleperson, responsiblepersonlink, applicationnumber, remarks
+        from detailstable
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="questionnumber != null and questionnumber != ''">
+                and questionnumber = #{questionnumber}
+            </if>
+            <if test="testyear != null and testyear != ''">
+                and testyear = #{testyear}
+            </if>
+            <if test="testunit != null and testunit != ''">
+                and testunit = #{testunit}
+            </if>
+            <if test="testpeople != null and testpeople != ''">
+                and testpeople = #{testpeople}
+            </if>
+            <if test="testpeoplelink != null and testpeoplelink != ''">
+                and testpeoplelink = #{testpeoplelink}
+            </if>
+            <if test="risklevel != null and risklevel != ''">
+                and risklevel = #{risklevel}
+            </if>
+            <if test="systemname != null and systemname != ''">
+                and systemname = #{systemname}
+            </if>
+            <if test="systemversion != null and systemversion != ''">
+                and systemversion = #{systemversion}
+            </if>
+            <if test="componentname != null and componentname != ''">
+                and componentname = #{componentname}
+            </if>
+            <if test="problemdescription != null and problemdescription != ''">
+                and problemdescription = #{problemdescription}
+            </if>
+            <if test="risklocation != null and risklocation != ''">
+                and risklocation = #{risklocation}
+            </if>
+            <if test="problemlevel != null and problemlevel != ''">
+                and problemlevel = #{problemlevel}
+            </if>
+            <if test="problemtime != null and problemtime != ''">
+                and problemtime = #{problemtime}
+            </if>
+            <if test="requesttime != null and requesttime != ''">
+                and requesttime = #{requesttime}
+            </if>
+            <if test="completiontime != null and completiontime != ''">
+                and completiontime = #{completiontime}
+            </if>
+            <if test="yesorno != null and yesorno != ''">
+                and yesorno = #{yesorno}
+            </if>
+            <if test="responsibleunit != null and responsibleunit != ''">
+                and responsibleunit = #{responsibleunit}
+            </if>
+            <if test="responsibleperson != null and responsibleperson != ''">
+                and responsibleperson = #{responsibleperson}
+            </if>
+            <if test="responsiblepersonlink != null and responsiblepersonlink != ''">
+                and responsiblepersonlink = #{responsiblepersonlink}
+            </if>
+            <if test="applicationnumber != null and applicationnumber != ''">
+                and applicationnumber = #{applicationnumber}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from detailstable
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="questionnumber != null and questionnumber != ''">
+                and questionnumber = #{questionnumber}
+            </if>
+            <if test="testyear != null and testyear != ''">
+                and testyear = #{testyear}
+            </if>
+            <if test="testunit != null and testunit != ''">
+                and testunit = #{testunit}
+            </if>
+            <if test="testpeople != null and testpeople != ''">
+                and testpeople = #{testpeople}
+            </if>
+            <if test="testpeoplelink != null and testpeoplelink != ''">
+                and testpeoplelink = #{testpeoplelink}
+            </if>
+            <if test="risklevel != null and risklevel != ''">
+                and risklevel = #{risklevel}
+            </if>
+            <if test="systemname != null and systemname != ''">
+                and systemname = #{systemname}
+            </if>
+            <if test="systemversion != null and systemversion != ''">
+                and systemversion = #{systemversion}
+            </if>
+            <if test="componentname != null and componentname != ''">
+                and componentname = #{componentname}
+            </if>
+            <if test="problemdescription != null and problemdescription != ''">
+                and problemdescription = #{problemdescription}
+            </if>
+            <if test="risklocation != null and risklocation != ''">
+                and risklocation = #{risklocation}
+            </if>
+            <if test="problemlevel != null and problemlevel != ''">
+                and problemlevel = #{problemlevel}
+            </if>
+            <if test="problemtime != null and problemtime != ''">
+                and problemtime = #{problemtime}
+            </if>
+            <if test="requesttime != null and requesttime != ''">
+                and requesttime = #{requesttime}
+            </if>
+            <if test="completiontime != null and completiontime != ''">
+                and completiontime = #{completiontime}
+            </if>
+            <if test="yesorno != null and yesorno != ''">
+                and yesorno = #{yesorno}
+            </if>
+            <if test="responsibleunit != null and responsibleunit != ''">
+                and responsibleunit = #{responsibleunit}
+            </if>
+            <if test="responsibleperson != null and responsibleperson != ''">
+                and responsibleperson = #{responsibleperson}
+            </if>
+            <if test="responsiblepersonlink != null and responsiblepersonlink != ''">
+                and responsiblepersonlink = #{responsiblepersonlink}
+            </if>
+            <if test="applicationnumber != null and applicationnumber != ''">
+                and applicationnumber = #{applicationnumber}
+            </if>
+            <if test="remarks != null and remarks != ''">
+                and remarks = #{remarks}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="" useGeneratedKeys="true">
+        insert into detailstable(id, questionnumber, testyear, testunit, testpeople, testpeoplelink, risklevel, systemname, systemversion, componentname, problemdescription, risklocation, problemlevel, problemtime, requesttime, completiontime, yesorno, responsibleunit, responsibleperson, responsiblepersonlink, applicationnumber, remarks)
+        values (#{id}, #{questionnumber}, #{testyear}, #{testunit}, #{testpeople}, #{testpeoplelink}, #{risklevel}, #{systemname}, #{systemversion}, #{componentname}, #{problemdescription}, #{risklocation}, #{problemlevel}, #{problemtime}, #{requesttime}, #{completiontime}, #{yesorno}, #{responsibleunit}, #{responsibleperson}, #{responsiblepersonlink}, #{applicationnumber}, #{remarks})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="" useGeneratedKeys="true">
+        insert into detailstable(id, questionnumber, testyear, testunit, testpeople, testpeoplelink, risklevel, systemname, systemversion, componentname, problemdescription, risklocation, problemlevel, problemtime, requesttime, completiontime, yesorno, responsibleunit, responsibleperson, responsiblepersonlink, applicationnumber, remarks)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.id}, #{entity.questionnumber}, #{entity.testyear}, #{entity.testunit}, #{entity.testpeople}, #{entity.testpeoplelink}, #{entity.risklevel}, #{entity.systemname}, #{entity.systemversion}, #{entity.componentname}, #{entity.problemdescription}, #{entity.risklocation}, #{entity.problemlevel}, #{entity.problemtime}, #{entity.requesttime}, #{entity.completiontime}, #{entity.yesorno}, #{entity.responsibleunit}, #{entity.responsibleperson}, #{entity.responsiblepersonlink}, #{entity.applicationnumber}, #{entity.remarks})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="" useGeneratedKeys="true">
+        insert into detailstable(id, questionnumber, testyear, testunit, testpeople, testpeoplelink, risklevel, systemname, systemversion, componentname, problemdescription, risklocation, problemlevel, problemtime, requesttime, completiontime, yesorno, responsibleunit, responsibleperson, responsiblepersonlink, applicationnumber, remarks)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.questionnumber}, #{entity.testyear}, #{entity.testunit}, #{entity.testpeople}, #{entity.testpeoplelink}, #{entity.risklevel}, #{entity.systemname}, #{entity.systemversion}, #{entity.componentname}, #{entity.problemdescription}, #{entity.risklocation}, #{entity.problemlevel}, #{entity.problemtime}, #{entity.requesttime}, #{entity.completiontime}, #{entity.yesorno}, #{entity.responsibleunit}, #{entity.responsibleperson}, #{entity.responsiblepersonlink}, #{entity.applicationnumber}, #{entity.remarks})
+        </foreach>
+        on duplicate key update
+        id = values(id),
+        questionnumber = values(questionnumber),
+        testyear = values(testyear),
+        testunit = values(testunit),
+        testpeople = values(testpeople),
+        testpeoplelink = values(testpeoplelink),
+        risklevel = values(risklevel),
+        systemname = values(systemname),
+        systemversion = values(systemversion),
+        componentname = values(componentname),
+        problemdescription = values(problemdescription),
+        risklocation = values(risklocation),
+        problemlevel = values(problemlevel),
+        problemtime = values(problemtime),
+        requesttime = values(requesttime),
+        completiontime = values(completiontime),
+        yesorno = values(yesorno),
+        responsibleunit = values(responsibleunit),
+        responsibleperson = values(responsibleperson),
+        responsiblepersonlink = values(responsiblepersonlink),
+        applicationnumber = values(applicationnumber),
+        remarks = values(remarks)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update detailstable
+        <set>
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="questionnumber != null and questionnumber != ''">
+                questionnumber = #{questionnumber},
+            </if>
+            <if test="testyear != null and testyear != ''">
+                testyear = #{testyear},
+            </if>
+            <if test="testunit != null and testunit != ''">
+                testunit = #{testunit},
+            </if>
+            <if test="testpeople != null and testpeople != ''">
+                testpeople = #{testpeople},
+            </if>
+            <if test="testpeoplelink != null and testpeoplelink != ''">
+                testpeoplelink = #{testpeoplelink},
+            </if>
+            <if test="risklevel != null and risklevel != ''">
+                risklevel = #{risklevel},
+            </if>
+            <if test="systemname != null and systemname != ''">
+                systemname = #{systemname},
+            </if>
+            <if test="systemversion != null and systemversion != ''">
+                systemversion = #{systemversion},
+            </if>
+            <if test="componentname != null and componentname != ''">
+                componentname = #{componentname},
+            </if>
+            <if test="problemdescription != null and problemdescription != ''">
+                problemdescription = #{problemdescription},
+            </if>
+            <if test="risklocation != null and risklocation != ''">
+                risklocation = #{risklocation},
+            </if>
+            <if test="problemlevel != null and problemlevel != ''">
+                problemlevel = #{problemlevel},
+            </if>
+            <if test="problemtime != null and problemtime != ''">
+                problemtime = #{problemtime},
+            </if>
+            <if test="requesttime != null and requesttime != ''">
+                requesttime = #{requesttime},
+            </if>
+            <if test="completiontime != null and completiontime != ''">
+                completiontime = #{completiontime},
+            </if>
+            <if test="yesorno != null and yesorno != ''">
+                yesorno = #{yesorno},
+            </if>
+            <if test="responsibleunit != null and responsibleunit != ''">
+                responsibleunit = #{responsibleunit},
+            </if>
+            <if test="responsibleperson != null and responsibleperson != ''">
+                responsibleperson = #{responsibleperson},
+            </if>
+            <if test="responsiblepersonlink != null and responsiblepersonlink != ''">
+                responsiblepersonlink = #{responsiblepersonlink},
+            </if>
+            <if test="applicationnumber != null and applicationnumber != ''">
+                applicationnumber = #{applicationnumber},
+            </if>
+            <if test="remarks != null and remarks != ''">
+                remarks = #{remarks},
+            </if>
+        </set>
+        where  id= #{id}
+    </update>
+
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from detailstable where  id= #{id}
+    </delete>
+
+    <update id="updateDetailstable">
+        UPDATE detailstable SET id =#{id},testyear = #{testyear}, testunit = #{testunit}, testpeople =#{testpeople}, testpeoplelink =#{testpeoplelink}, risklevel=#{risklevel}, requesttime =#{requesttime}, completiontime=#{completiontime}, yesorno=#{yesorno}, responsibleunit=#{responsibleunit}, responsibleperson = #{responsibleperson}, responsiblepersonlink =#{responsiblepersonlink},applicationnumber=#{applicationnumber},systemversion=#{systemversion},remarks=#{remarks} where systemname =#{systemname} and problemtime =#{problemtime} and componentname=#{componentname} and problemdescription=#{problemdescription} and risklocation=#{risklocation}  and questionnumber=#{questionnumber};
+    </update>
+
+
+</mapper>
+

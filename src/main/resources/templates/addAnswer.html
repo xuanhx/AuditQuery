@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns:th="http://www.thymealf.org">
+<head>
+	<title>添加answer信息</title>
+<!--	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+	<link rel="stylesheet" type="text/css"
+		  href="/static/css/style.css" />
+	<style>
+		.centered-div {
+			width: 500px;
+			height: -10px;
+			background-color: white;
+			margin: auto;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+	</style>
+</head>
+
+<body>
+<div id="wrap">
+	<div id="top_content">
+
+		<div id="content" class="centered-div">
+			<p id="whereami">
+			</p>
+			<h1>
+				添加answer信息:
+			</h1>
+			<form id="add" th:action="@{'/answer/addAnswer'}" method="post">
+				<table cellpadding="0" cellspacing="0" border="0"
+					   class="form_table">
+					<tr>
+						<td valign="middle" align="right" style="padding-right: 10px">
+							问题类型:
+						</td>
+						<td valign="middle" align="left">
+							<input type="text" class="inputgri" name="problemtype" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right" style="padding-right: 10px;padding-top: 10px">
+							文字回答:
+						</td>
+						<td valign="middle" align="left" style="padding-top: 10px">
+							<input type="text" class="inputgri" name="wordanswer" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right" style="padding-right: 10px;padding-top: 10px">
+							图片回答:
+						</td>
+						<td valign="middle" align="left" style="padding-top: 10px">
+							<input type="text" width="" name="pictureanswer" />
+						</td>
+					</tr>
+
+					<tr>
+						<td valign="middle" align="right" style="padding-right: 10px;padding-top: 10px">
+							备注:
+						</td>
+						<td valign="middle" align="left" style="padding-top: 10px">
+							<input type="text" class="inputgri" name="remarks" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="right" style="padding-right: 10px;padding-top: 10px">
+							表名:
+						</td>
+						<td valign="middle" align="left" style="padding-top: 10px">
+							<input type="text" class="inputgri" name="tbname" />
+						</td>
+					</tr>
+				</table>
+				<p>
+					<input type="submit" class="button" style="margin-left: 20px" value="确认添加" />
+					<input type="button" class="button" style="margin-left: 40px" onclick="addEmp()"value="返回列表" />
+					<script>
+						function addEmp(){
+							location.href = '[[@{/answer/lists}]]';
+						}
+					</script>
+				</p>
+			</form>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+			//获取表单对象，并添加提交实践监听器,监听函数中第二个参数是一个函数，中间会自动传入实践对象
+			document.getElementById("add").addEventListener("submit",function (event){
+				//组织默认提交事件的发生
+				event.preventDefault();
+				//获取表单中所有元素
+				let elements = this.elements;
+				//遍历元素的值加入对象结构
+				let objectUtil = {};
+				for(let i =0; i < elements.length;i++){
+					objectUtil[elements[i].name] = elements[i].value;
+				}
+				//至此表单中所有数据都被装入js对象，我们将对象转为json对象，备传。
+				let jsonRel=JSON.stringify(objectUtil);
+				//创建XmlHttpRequest对象
+				var toFile = new XMLHttpRequest();
+				//指定请求类型，路径及是否异步
+				toFile.open("post","http://localhost:8080/answer/add",true);
+				//设置请求头，变为application/json类型
+				toFile.setRequestHeader("Content-Type","application/json");
+				//发送数据
+				toFile.send(jsonRel);
+				//最后监听返回状态，一旦发生改变，就跳转页面
+				toFile.onreadystatechange = function (){
+					if(toFile.readyState == 4 && toFile.status == 200){
+						alert("数据添加成功");
+						//接收返回页面，并打开新窗口显示
+						let responesRel=toFile.responseText;
+						document.write(responesRel);
+
+					}
+
+				}
+			})
+		</script>
+		</div>
+	</div>
+
+</div>
+</body>
+
+</html>
+
